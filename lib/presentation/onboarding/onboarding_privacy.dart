@@ -3,6 +3,7 @@ import 'package:derma_care/core/generated/assets.gen.dart';
 import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
+import 'package:derma_care/presentation/experience-setup/personalization_page.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingPrivacy extends StatelessWidget {
@@ -75,7 +76,10 @@ DermCare uses your camera to analyze your skin condition. We take your privacy s
             ),
             const Spacer(),
             CustomButton(
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const PersonalizationPage()),
+              ),
               text: 'Next',
             ),
           ],

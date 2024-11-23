@@ -1,7 +1,8 @@
 import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
-import 'package:derma_care/experience-setup/presentation/widgets/question_card.dart';
+import 'package:derma_care/presentation/experience-setup/completion_page.dart';
+import 'package:derma_care/presentation/experience-setup/widgets/question_card.dart';
 import 'package:flutter/material.dart';
 
 class PersonalizationPage extends StatefulWidget {
@@ -58,7 +59,17 @@ class _PersonalizationPageState extends State<PersonalizationPage> {
             ),
             const Spacer(),
             CustomButton(
-              onPressed: canContinue ? () {} : null,
+              onPressed: canContinue
+                  ? () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CompletionPage(
+                            skinConcern: selectedSkinConcern!,
+                            skinType: selectedSkinType!,
+                          ),
+                        ),
+                      )
+                  : null,
               text: 'Save & Continue',
             ),
           ],
