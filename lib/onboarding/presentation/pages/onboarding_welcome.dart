@@ -1,5 +1,5 @@
-// import 'package:derma_care/core/generated/assets.gen.dart';
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/assets.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
 import 'package:derma_care/core/utils/extensions/context_extension.dart';
@@ -19,13 +19,13 @@ class OnboardingWelcome extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 150,
-                // backgroundImage: Assets.images.onboardingWelcome.provider(),
+                backgroundImage: Assets.images.onboardingWelcome.provider(),
               ),
               const SizedBox(height: 32),
               const Text(
                 'Welcome to DermaCare:',
                 style: TextStyle(
-                  // fontFamily: FontFamily.roboto,
+                  fontFamily: FontFamily.roboto,
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -33,7 +33,7 @@ class OnboardingWelcome extends StatelessWidget {
               const Text(
                 'Your Personal',
                 style: TextStyle(
-                  // fontFamily: FontFamily.roboto,
+                  fontFamily: FontFamily.roboto,
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -41,7 +41,7 @@ class OnboardingWelcome extends StatelessWidget {
               const Text(
                 'Dermatology Assistant',
                 style: TextStyle(
-                  // fontFamily: FontFamily.roboto,
+                  fontFamily: FontFamily.roboto,
                   fontSize: 24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -50,7 +50,7 @@ class OnboardingWelcome extends StatelessWidget {
               const Text(
                 'Discover tailored skin care insights powered by AI',
                 style: TextStyle(
-                  // fontFamily: FontFamily.inter,
+                  fontFamily: FontFamily.inter,
                   fontSize: 16,
                   fontWeight: FontWeight.w300,
                 ),

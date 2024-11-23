@@ -1,6 +1,6 @@
 import 'package:derma_care/core/constants/app_colors.dart';
-// import 'package:derma_care/core/generated/assets.gen.dart';
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/assets.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class OnboardingPrivacy extends StatelessWidget {
                 color: AppColors.primaryLightest,
                 shape: BoxShape.circle,
               ),
-              // child: Assets.icons.security.svg(),
+              child: Assets.icons.security.svg(),
             ),
             const SizedBox(height: 32),
             const Padding(
@@ -29,7 +29,7 @@ class OnboardingPrivacy extends StatelessWidget {
               child: Text(
                 'We Care About Your Privacy',
                 style: TextStyle(
-                  // fontFamily: FontFamily.roboto,
+                  fontFamily: FontFamily.roboto,
                   fontSize: 26,
                   fontWeight: FontWeight.w700,
                 ),
@@ -65,7 +65,7 @@ DermCare uses your camera to analyze your skin condition. We take your privacy s
 • Your data is encrypted and secure
 ''',
                 style: TextStyle(
-                  // fontFamily: FontFamily.inter,
+                  fontFamily: FontFamily.inter,
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
                   color: AppColors.secondary,

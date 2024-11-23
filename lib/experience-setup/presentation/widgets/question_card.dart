@@ -1,5 +1,5 @@
 import 'package:derma_care/core/constants/app_colors.dart';
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
 class QuestionCard extends StatelessWidget {
@@ -44,7 +44,7 @@ class QuestionCard extends StatelessWidget {
           Text(
             question,
             style: const TextStyle(
-              // fontFamily: FontFamily.inter,
+              fontFamily: FontFamily.inter,
               fontSize: 16,
               fontWeight: FontWeight.w600,
             ),
@@ -117,7 +117,7 @@ class _OptionCard extends StatelessWidget {
         child: Text(
           text,
           style: const TextStyle(
-            // fontFamily: FontFamily.inter,
+            fontFamily: FontFamily.inter,
             fontSize: 14,
             fontWeight: FontWeight.w400,
           ),

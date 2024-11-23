@@ -1,6 +1,6 @@
 import 'package:derma_care/core/constants/app_colors.dart';
-// import 'package:derma_care/core/generated/assets.gen.dart';
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/assets.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -39,13 +39,13 @@ class CustomButton extends StatelessWidget {
             Text(
               text,
               style: const TextStyle(
-                // fontFamily: FontFamily.inter,
+                fontFamily: FontFamily.inter,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(width: 8),
-            // Assets.icons.arrowRight.svg(),
+            Assets.icons.arrowRight.svg(),
           ],
         ),
       ),

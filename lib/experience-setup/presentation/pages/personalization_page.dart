@@ -1,4 +1,4 @@
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
 import 'package:derma_care/experience-setup/presentation/widgets/question_card.dart';
@@ -27,7 +27,7 @@ class _PersonalizationPageState extends State<PersonalizationPage> {
             const Text(
               "Let's Personalize Your Experience",
               style: TextStyle(
-                // fontFamily: FontFamily.roboto,
+                fontFamily: FontFamily.roboto,
                 fontSize: 26,
                 fontWeight: FontWeight.w700,
               ),

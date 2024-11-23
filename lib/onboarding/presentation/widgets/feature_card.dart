@@ -1,15 +1,17 @@
 import 'package:derma_care/core/constants/app_colors.dart';
-// import 'package:derma_care/core/generated/fonts.gen.dart';
+import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FeatureCard extends StatelessWidget {
   const FeatureCard({
+    required this.icon,
     required this.title,
     required this.description,
     super.key,
   });
 
+  final SvgPicture icon;
   final String title;
   final String description;
 
@@ -44,7 +46,7 @@ class FeatureCard extends StatelessWidget {
               color: AppColors.primaryLight,
               shape: BoxShape.circle,
             ),
-            // child: icon,
+            child: icon,
           ),
           const SizedBox(width: 16),
           Flexible(
@@ -54,7 +56,7 @@ class FeatureCard extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    // fontFamily: FontFamily.inter,
+                    fontFamily: FontFamily.inter,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -62,7 +64,7 @@ class FeatureCard extends StatelessWidget {
                 Text(
                   description,
                   style: const TextStyle(
-                    // fontFamily: FontFamily.inter,
+                    fontFamily: FontFamily.inter,
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
                   ),
