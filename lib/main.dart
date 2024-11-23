@@ -1,6 +1,7 @@
 import 'package:derma_care/core/constants/app_colors.dart';
 import 'package:derma_care/core/constants/app_constants.dart';
 import 'package:derma_care/presentation/chat/chat_page.dart';
+import 'package:derma_care/presentation/onboarding/onboarding_welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -31,10 +32,11 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const ChatPage(
-        skinType: '',
-        skinConcern: '',
-      ),
+      home: OnboardingWelcome(),
+      // home: const ChatPage(
+      //   skinType: '',
+      //   skinConcern: '',
+      // ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:derma_care/presentation/chat/chat_page.dart';
 import 'package:derma_care/presentation/widgets/detector_view.dart';
 import 'package:derma_care/presentation/widgets/face_detector_painter.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +68,20 @@ class _FaceScanPageState extends State<FaceScanPage> {
       });
     } else {
       // Handle final step
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => ChatPage(
+            skinType: '',
+            skinConcern: '',
+          ),
+        ),
+      );
       print("Face scan completed");
+      //const ChatPage(
+      //   skinType: '',
+      //   skinConcern: '',
+      // ),
     }
   }
 
