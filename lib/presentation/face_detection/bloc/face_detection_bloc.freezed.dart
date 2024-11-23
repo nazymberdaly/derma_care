@@ -81,10 +81,10 @@ class _$FaceDetectionEventCopyWithImpl<$Res, $Val extends FaceDetectionEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? imageFile = freezed,
+    Object? imageFile = null,
   }) {
     return _then(_value.copyWith(
-      imageFile: freezed == imageFile
+      imageFile: null == imageFile
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
               as File,
@@ -116,10 +116,10 @@ class __$$LoadImageImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? imageFile = freezed,
+    Object? imageFile = null,
   }) {
     return _then(_$LoadImageImpl(
-      freezed == imageFile
+      null == imageFile
           ? _value.imageFile
           : imageFile // ignore: cast_nullable_to_non_nullable
               as File,
@@ -145,12 +145,12 @@ class _$LoadImageImpl implements _LoadImage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadImageImpl &&
-            const DeepCollectionEquality().equals(other.imageFile, imageFile));
+            (identical(other.imageFile, imageFile) ||
+                other.imageFile == imageFile));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(imageFile));
+  int get hashCode => Object.hash(runtimeType, imageFile);
 
   /// Create a copy of FaceDetectionEvent
   /// with the given fields replaced by the non-null parameter values.

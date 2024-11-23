@@ -1,5 +1,5 @@
-
 import 'package:derma_care/presentation/face_detection/face_detection_screen.dart';
+import 'package:derma_care/presentation/face_detection/face_scan_ui.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FaceDetectorView(),
+      home: const FaceScanPage(),
     );
   }
 }

@@ -21,8 +21,11 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   bool _canProcess = true;
   bool _isBusy = false;
   CustomPaint? _customPaint;
-  String? _text;
+  String _instruction = 'Face Forward';
   var _cameraLensDirection = CameraLensDirection.front;
+
+  int _currentStep = 0; // 0: Front, 1: Left, 2: Right
+  bool _imageCaptured = false;
 
   @override
   void dispose() {
@@ -36,7 +39,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
     return DetectorView(
       title: 'Face Detector',
       customPaint: _customPaint,
-      text: _text,
+      text: _instruction,
       onImage: _processImage,
       initialCameraLensDirection: _cameraLensDirection,
       onCameraLensDirectionChanged: (value) => _cameraLensDirection = value,
@@ -44,12 +47,9 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
   }
 
   Future<void> _processImage(InputImage inputImage) async {
-    if (!_canProcess) return;
-    if (_isBusy) return;
+    if (!_canProcess || _isBusy || _imageCaptured) return;
     _isBusy = true;
-    setState(() {
-      _text = '';
-    });
+
     final faces = await _faceDetector.processImage(inputImage);
     if (inputImage.metadata?.size != null && inputImage.metadata?.rotation != null) {
       final painter = FaceDetectorPainter(
@@ -64,7 +64,7 @@ class _FaceDetectorViewState extends State<FaceDetectorView> {
       for (final face in faces) {
         text += 'face: ${face.boundingBox}\n\n';
       }
-      _text = text;
+      //_text = text;
       // TODO: set _customPaint to draw boundingRect on top of image
       _customPaint = null;
     }
