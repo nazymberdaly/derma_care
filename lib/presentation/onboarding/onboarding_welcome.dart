@@ -3,6 +3,7 @@ import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
 import 'package:derma_care/core/utils/extensions/context_extension.dart';
+import 'package:derma_care/presentation/onboarding/onboarding_features.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingWelcome extends StatelessWidget {
@@ -58,7 +59,10 @@ class OnboardingWelcome extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               CustomButton(
-                onPressed: () {},
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const OnboardingFeatures()),
+                ),
                 text: 'Get Started',
               ),
             ],
