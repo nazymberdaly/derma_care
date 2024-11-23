@@ -14,7 +14,7 @@ class OnboardingWelcome extends StatelessWidget {
     return GradientScaffold(
       body: Center(
         child: SizedBox(
-          width: context.mediaSize.width * 0.7,
+          width: context.mediaSize.width * 0.8,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -25,6 +25,7 @@ class OnboardingWelcome extends StatelessWidget {
               const SizedBox(height: 32),
               const Text(
                 'Welcome to DermaCare:',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: FontFamily.roboto,
                   fontSize: 24,
@@ -33,6 +34,7 @@ class OnboardingWelcome extends StatelessWidget {
               ),
               const Text(
                 'Your Personal',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: FontFamily.roboto,
                   fontSize: 24,

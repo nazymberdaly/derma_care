@@ -76,8 +76,8 @@ class _CameraViewState extends State<CameraView> {
     if (_cameras.isEmpty) return Container();
     if (_controller == null) return Container();
     if (_controller?.value.isInitialized == false) return Container();
-    return ColoredBox(
-      color: Colors.black,
+    return Container(
+      color: Colors.white,
       child: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -86,16 +86,21 @@ class _CameraViewState extends State<CameraView> {
                 ? Center(
                     child: const Text('Changing camera lens'),
                   )
-                : CameraPreview(
-                    _controller!,
-                    child: widget.customPaint,
+                : Container(
+                    height: 400, // Set height to match the desired size
+
+                    child: ClipOval(
+                      child: CameraPreview(
+                        _controller!,
+                        child: widget.customPaint,
+                      ),
+                    ),
                   ),
           ),
-          _backButton(),
-          _switchLiveCameraToggle(),
-          _detectionViewModeToggle(),
-          _zoomControl(),
-          _exposureControl(),
+          // _switchLiveCameraToggle(),
+          //  _detectionViewModeToggle(),
+          //_zoomControl(),
+          //  _exposureControl(),
         ],
       ),
     );
@@ -374,5 +379,21 @@ class _CameraViewState extends State<CameraView> {
         bytesPerRow: plane.bytesPerRow, // used only in iOS
       ),
     );
+  }
+}
+
+class CircleClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    // Create a circular path using the given size (width and height of the widget)
+    final Path path = Path();
+    path.addOval(Rect.fromCircle(center: Offset(size.width / 2, size.height / 2), radius: size.width / 2));
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // Return false since the clipping doesn't depend on any external changes
+    return false;
   }
 }

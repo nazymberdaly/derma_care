@@ -3,6 +3,7 @@ import 'package:derma_care/core/generated/assets.gen.dart';
 import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
+import 'package:derma_care/presentation/face_detection/face_scan_ui.dart';
 import 'package:flutter/material.dart';
 
 class CompletionPage extends StatelessWidget {
@@ -65,7 +66,14 @@ class CompletionPage extends StatelessWidget {
             ),
             const Spacer(),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => FaceScanPage(),
+                  ),
+                );
+              },
               text: 'Start Now',
               isExpanded: true,
             ),
