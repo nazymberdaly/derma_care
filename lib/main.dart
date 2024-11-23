@@ -1,10 +1,16 @@
 import 'package:derma_care/core/constants/app_colors.dart';
 import 'package:derma_care/presentation/chat/chat_page.dart';
-import 'package:derma_care/presentation/onboarding/onboarding_welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://cyfdlsalkxtwvsrofrek.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN5ZmRsc2Fsa3h0d3Zzcm9mcmVrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzIzMzYxNDYsImV4cCI6MjA0NzkxMjE0Nn0.IQjoG4KVH0P82goryop7I2rlF7ZEgE9VFEtLqeYymP4',
+  );
 
   runApp(const MyApp());
 }
