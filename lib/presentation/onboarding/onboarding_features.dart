@@ -2,7 +2,8 @@ import 'package:derma_care/core/generated/assets.gen.dart';
 import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:derma_care/core/presentation/widgets/custom_button.dart';
 import 'package:derma_care/core/presentation/widgets/gradient_scaffold.dart';
-import 'package:derma_care/onboarding/presentation/widgets/feature_card.dart';
+import 'package:derma_care/presentation/onboarding/onboarding_privacy.dart';
+import 'package:derma_care/presentation/onboarding/widgets/feature_card.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingFeatures extends StatelessWidget {
@@ -43,7 +44,10 @@ class OnboardingFeatures extends StatelessWidget {
             ),
             const Spacer(),
             CustomButton(
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const OnboardingPrivacy()),
+              ),
               text: 'Next',
             ),
           ],

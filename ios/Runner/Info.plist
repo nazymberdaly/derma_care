@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Derma Ai needs camera access to face detection</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Derma Ai needs access to photo library to upload images</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
