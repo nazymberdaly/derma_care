@@ -18,8 +18,8 @@ class OnboardingPrivacy extends StatelessWidget {
           children: [
             Container(
               padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: AppColors.primary.withOpacity(0.2),
+              decoration: const BoxDecoration(
+                color: AppColors.primaryLightest,
                 shape: BoxShape.circle,
               ),
               child: Assets.icons.security.svg(),
@@ -76,7 +76,7 @@ DermCare uses your camera to analyze your skin condition. We take your privacy s
             ),
             const Spacer(),
             CustomButton(
-              onPressed: () => context.go('/onboarding/features/privacy'),
+              onPressed: () => context.go('/experience-setup'),
               text: 'Next',
             ),
           ],

@@ -31,7 +31,10 @@ class AppRouter {
         routes: [
           GoRoute(
             path: 'completion',
-            builder: (_, __) => const CompletionPage(),
+            builder: (_, state) => CompletionPage(
+              skinConcern: state.uri.queryParameters['skinConcern']!,
+              skinType: state.uri.queryParameters['skinType']!,
+            ),
           ),
         ],
       ),
