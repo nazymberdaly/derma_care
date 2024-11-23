@@ -60,3 +60,11 @@ build/
 lcov.info
 
 **/pubspec.lock
+
+# Code generation
+**/generated/
+**/*.g.dart
+**/*.gr.dart
+**/*.gen.dart
+**/*.freezed.dart
+**/*.select.dart
