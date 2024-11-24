@@ -51,7 +51,7 @@ async function runChat(
       model: "claude-3-5-sonnet-20241022",
       max_tokens: 1000,
       system:
-        "You are a dermatology-focused AI assistant designed to analyze skin conditions from photographs and provide helpful recommendations.",
+        "You are a dermatology-focused AI assistant designed to provide helpful recommendations.",
       messages: messages,
       tools: [
         {
