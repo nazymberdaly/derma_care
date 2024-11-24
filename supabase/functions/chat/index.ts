@@ -1,73 +1,95 @@
-import { createClient } from "@supabase/supabase-js";
 import { Anthropic } from "@anthropic/sdk";
-
-const supabase = createClient(
-  Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-);
 
 const headers = {
   "Content-Type": "application/json",
 };
 
-Deno.serve(async (req) => {
-  const body = await req.formData();
+const anthropic = new Anthropic({
+  apiKey: Deno.env.get("ANTHROPIC_API_KEY")!,
+});
 
-  const file = body.get("file");
-  if (!file || !(file instanceof File)) {
-    return new Response(
-      JSON.stringify({ error: "No file provided" }),
+async function generateLaserTreatmentAfterImg(
+  imageUrl: string,
+): Promise<string> {
+  try {
+    const imageResponse = await fetch(imageUrl);
+    if (!imageResponse.ok) {
+      throw new Error(`Failed to fetch image: ${imageResponse.statusText}`);
+    }
+    const imageBlob = await imageResponse.blob();
+
+    // Create FormData and append image
+    const formData = new FormData();
+    formData.append("file", imageBlob, "image.jpg");
+
+    const response = await fetch(
+      "http://40.83.249.35:8000/api/generate-image",
       {
-        status: 400,
-        headers: headers,
+        method: "POST",
+        body: formData,
       },
     );
+
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.output;
+  } catch (error) {
+    console.error("Error processing tool call:", error);
+    throw error;
   }
+}
 
-  // const { data, error } = await supabase.storage
-  //   .from("images")
-  //   .upload(`${crypto.randomUUID()}-${file.name}`, file);
-
-  // if (error) {
-  //   return new Response(
-  //     JSON.stringify(error),
-  //     {
-  //       status: 500,
-  //       headers: corsHeaders,
-  //     },
-  //   );
-  // }
-
-  const model = new Anthropic({
-    apiKey: Deno.env.get("ANTHROPIC_API_KEY")!,
-  });
-
-  const fileContent = await file.arrayBuffer();
-  const base64Image = btoa(
-    String.fromCharCode(...new Uint8Array(fileContent)),
-  );
-
-  const response = await model.messages.create({
-    model: "claude-3-5-sonnet-20241022",
-    max_tokens: 1000,
-    messages: [{
-      role: "user",
-      content: [
+async function runChat(
+  facePhotoUrl: string,
+  messages: Anthropic.Messages.Message[],
+): Promise<{ message?: string; image?: string }> {
+  const response = await anthropic.messages.create(
+    {
+      model: "claude-3-5-sonnet-20241022",
+      max_tokens: 1000,
+      system:
+        "You are a dermatology-focused AI assistant designed to analyze skin conditions from photographs and provide helpful recommendations.",
+      messages: messages,
+      tools: [
         {
-          type: "image",
-          source: {
-            type: "base64",
-            data: base64Image,
-            media_type: "image/jpeg",
+          name: "generate_laser_treatment_after_img",
+          description:
+            "Generate an image of the skin after laser treatment on the 1st day",
+          input_schema: {
+            type: "object",
           },
         },
-        {
-          type: "text",
-          text: "Please analyze this image and describe what you see.",
-        },
       ],
-    }],
-  });
+    },
+  );
+
+  const result: { message?: string; image?: string } = {};
+
+  const text = response.content.find((content) => content.type === "text");
+  if (text) {
+    result.message = text.text;
+  }
+
+  const toolCall = response.content.find((content) =>
+    content.type === "tool_use"
+  );
+  if (toolCall?.name === "generate_laser_treatment_after_img") {
+    const image = await generateLaserTreatmentAfterImg(facePhotoUrl);
+    result.image = image;
+  }
+
+  return result;
+}
+
+Deno.serve(async (req) => {
+  const body = await req.json();
+
+  const response = await runChat(body.facePhotoUrl, body.messages);
+
+  console.log(response);
 
   return new Response(
     JSON.stringify(response),
