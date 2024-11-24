@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:derma_care/core/constants/app_colors.dart';
+import 'package:derma_care/core/constants/app_constants.dart';
 import 'package:derma_care/core/generated/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
@@ -24,6 +25,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  String? _facePhotoUrl;
+
   final List<types.Message> _messages = [];
   final _user = const types.User(id: 'user');
   final _assistant = const types.User(
@@ -43,7 +46,7 @@ class _ChatPageState extends State<ChatPage> {
 
   String _formatRecommendations(List<dynamic> recommendations) {
     final recommendationsText = recommendations.map((section) {
-      final details = section['details'] as List<String>;
+      final details = section['details'] as List<dynamic>;
       return '''
 📍 **${section['title']}:**
 ${details.map((d) => "  • $d").join("\n")}''';
@@ -110,9 +113,10 @@ ${details.map((d) => "  • $d").join("\n")}''';
       files: files,
     );
 
-    final photoAnalysis = res.data['photoAnalysis'];
-    final observations = res.data['observations'];
-    final recommendations = res.data['recommendations'];
+    _facePhotoUrl = '${AppConstants.supabaseUrl}/storage/v1/object/public/${res.data['facePhotoUrl']}';
+    final photoAnalysis = res.data['analysis']['photoAnalysis'];
+    final observations = res.data['analysis']['observations'];
+    final recommendations = res.data['analysis']['recommendations'];
 
     _addMessage(
       types.TextMessage(
@@ -143,7 +147,7 @@ ${details.map((d) => "  • $d").join("\n")}''';
     );
   }
 
-  void _handleSendPressed(types.PartialText message) {
+  Future<void> _handleSendPressed(types.PartialText message) async {
     final textMessage = types.TextMessage(
       id: UniqueKey().toString(),
       author: _user,
@@ -152,6 +156,60 @@ ${details.map((d) => "  • $d").join("\n")}''';
     );
 
     _addMessage(textMessage);
+
+    final List<Map<String, dynamic>> messages = [];
+    for (var message in _messages.reversed) {
+      if (message is types.TextMessage) {
+        messages.add(
+          {
+            'role': message.author.id,
+            'content': [
+              {
+                'type': 'text',
+                'text': message.text,
+              },
+            ]
+          },
+        );
+      }
+    }
+    log(messages.toString());
+
+    setState(() => _isLoading = true);
+
+    final res = await Supabase.instance.client.functions.invoke(
+      'chat',
+      body: {
+        'facePhotoUrl': _facePhotoUrl,
+        'messages': messages,
+      },
+    );
+
+    log(res.data.toString());
+
+    if (res.data['message'] != null) {
+      _addMessage(
+        types.TextMessage(
+          author: _assistant,
+          id: UniqueKey().toString(),
+          text: res.data['message'],
+        ),
+      );
+    }
+    if (res.data['image'] != null) {
+      _addMessage(
+        types.ImageMessage(
+          id: UniqueKey().toString(),
+          author: _assistant,
+          createdAt: DateTime.now().millisecondsSinceEpoch,
+          name: res.data['image'],
+          size: 0,
+          uri: res.data['image'],
+        ),
+      );
+    }
+
+    setState(() => _isLoading = false);
   }
 
   void _addMessage(types.Message message) {
