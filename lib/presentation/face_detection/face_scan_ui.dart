@@ -75,8 +75,8 @@ class _FaceScanPageState extends State<FaceScanPage> {
         context,
         MaterialPageRoute(
           builder: (_) => ChatPage(
-            skinType: '',
-            skinConcern: '',
+            skinConcern: widget.skinConcern,
+            skinType: widget.skinType,
           ),
         ),
       );
