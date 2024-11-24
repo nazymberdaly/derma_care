@@ -70,7 +70,10 @@ class CompletionPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (_) => FaceScanPage(),
+                    builder: (_) => FaceScanPage(
+                      skinConcern: skinConcern,
+                      skinType: skinType,
+                    ),
                   ),
                 );
               },

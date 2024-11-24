@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
 
 class FaceScanPage extends StatefulWidget {
-  const FaceScanPage({super.key});
+  const FaceScanPage({required this.skinConcern, required this.skinType, super.key});
+
+  final String skinConcern;
+  final String skinType;
 
   @override
   State<FaceScanPage> createState() => _FaceScanPageState();
